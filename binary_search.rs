@@ -1,10 +1,10 @@
-fn binary_search_in_numbers_array (list:&mut[i32], item:i32) -> Option<usize> {
+fn binary_search_in_numbers_array (list: &mut[i32], item: i32) -> Option<usize> {
   let mut lowest_position = 0;
   let mut highest_position = list.len() - 1;
 
   while lowest_position <= highest_position {
     let middle_position = (lowest_position + highest_position) / 2; // (0 + 10 == 10) / 2 = 5  0 1 2 3 4 [5] 6 7 8 9 10
-    let guess:i32 = list[middle_position]; 
+    let guess: i32 = list[middle_position]; 
 
     if guess == item {
       return Some(middle_position);
