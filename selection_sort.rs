@@ -1,4 +1,5 @@
 #[derive(Clone)]
+#[derive(Debug)]
 struct Dog {
   name: String,
   age: i8,
@@ -19,20 +20,18 @@ fn find_oldest_dog(dogs: Vec<Dog>) -> usize {
   return oldest_dog_index;
 }
 
-fn seletion_sort_by_age(mut dogs: Vec<Dog>) {
+fn seletion_sort_by_age(mut dogs: Vec<Dog>) -> Vec<Dog> {
   let mut sorted_dogs: Vec<Dog> = vec![];
 
-  for i in 0..dogs.len() - 1 {
+  while dogs.len() > 0 {
     let oldest_dog_index = find_oldest_dog(dogs.clone());
     let oldest_dog = dogs[oldest_dog_index].clone();
 
-    println!("Dog: {} - {}", oldest_dog.name, oldest_dog.age);
-
+    dogs.drain(oldest_dog_index..oldest_dog_index+1);
     sorted_dogs.push(oldest_dog);
-    dogs.swap(i, oldest_dog_index); // меняем местами
   }
 
-  println!("\nOldest dog: {}", dogs[find_oldest_dog(dogs.clone())].name);
+  return sorted_dogs;
 }
 
 pub fn run() {
@@ -46,5 +45,7 @@ pub fn run() {
     Dog { name: "Adel".to_string(), age: 1},
   ];
 
-  seletion_sort_by_age(unsorted_array.clone());
+  let sorted_dogs = seletion_sort_by_age(unsorted_array.clone());
+
+  println!("Dogs: {:?}", sorted_dogs);
 }
